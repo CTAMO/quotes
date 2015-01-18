@@ -5,22 +5,22 @@
     <link rel="stylesheet" href="../../node_modules/mocha/mocha.css"/>
 </head>
 <body>
-    <div id="mocha"></div>
-    <script src="../../node_modules/mocha/mocha.js"></script>
-    <script src="../../node_modules/chai/chai.js"></script>
-    <script>
-        var expect = chai.expect;
+<div id="mocha"></div>
+<script src="../../node_modules/mocha/mocha.js"></script>
+<script src="../../node_modules/chai/chai.js"></script>
+<script>
+    var expect = chai.expect;
 
-        mocha.setup({
-            ui: 'bdd',
-            ignoreLeaks: true
-        });
+    mocha.setup({
+        ui: 'bdd',
+        ignoreLeaks: true
+    });
 
-        onload = function() {
-            mocha.run();
-        };
-    </script>
-    <script src="../../app/client-generator.js"></script>
-    <script src="client-tests.js"></script>
+    onload = function() {
+        mocha.run();
+    };
+</script>
+<script src="../../app/client-generator.js"></script>
+<script src="client-tests.js"></script>
 </body>
 </html>
