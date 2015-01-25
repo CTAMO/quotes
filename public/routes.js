@@ -11,6 +11,4 @@
     //            controller: "HomeController"
     //    });
     //}
-})();/**
- * Created by Stamo on 1/24/2015.
- */
+})();

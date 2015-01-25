@@ -6,14 +6,16 @@
 
 </head>
 <body ng-app="quotesApp">
-    <div id="content" ng-controller="HomeController">{{text}}</div>
+    <div id="content" ng-controller="HomeController">{{messages}}</div>
 
 
     <script src="libs/jquery/dist/jquery.js"></script>
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-route/angular-route.js"></script>
-    <script src="app.module.js"></script>
+    <script src="app.js"></script>
     <script src="routes.js"></script>
-    <script src="HomeController.js"></script>
+    <script src="components/home/MessagesService.js"></script>
+    <script src="components/home/HomeController.js"></script>
+
 </body>
 </html>

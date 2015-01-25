@@ -25,7 +25,6 @@ app.set("port", (process.env.PORT || APP_PORT));
 
 mongoose.connect(database.url);
 
-
 require("./app/routes")(app);
 
 app.listen(app.get("port"), function() {
