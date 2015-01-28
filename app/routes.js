@@ -4,8 +4,26 @@
     var User = require("./models/User");
     var Message = require("./models/Message");
 
-    module.exports = function(app) {
-            app.get("/api/messages", function(request, response) {
+    module.exports = function(app, passport) {
+
+        app.get('/login', function(req, res) {
+
+            // render the page and pass in any flash data if it exists
+            res.render('login.html', { message: req.flash('loginMessage') });
+        });
+
+        app.get('/logout', function(req, res) {
+            req.logout();
+            res.redirect('/');
+        });
+
+        app.get('/signup', function(req, res) {
+
+            // render the page and pass in any flash data if it exists
+            res.render('signup.ejs', { message: req.flash('signupMessage') });
+        });
+
+        app.get("/api/messages", function(request, response) {
 
             Message.find(function(error, data) {
                 if (error) {
@@ -93,5 +111,17 @@
             //response.sendFile("./public/index.html"); // load the single view file (angular will handle the page changes on the front-end)
         });
     };
+
+    // route middleware to make sure a user is logged in
+    function isLoggedIn(req, res, next) {
+
+        // if user is authenticated in the session, carry on
+        if (req.isAuthenticated()) {
+            return next();
+        }
+
+        // if they aren't redirect them to the home page
+        res.redirect('/');
+    }
 })();
 

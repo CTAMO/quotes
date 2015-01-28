@@ -3,10 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>.:: Quotes ::.</title>
-
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/messages.css">
 </head>
 <body ng-app="quotesApp">
-    <div id="content" ng-controller="HomeController">{{messages}}</div>
+
+
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <h1 class="logo">Quotes</h1>
+            </div>
+            <div id="logindisplay">
+            </div>
+
+            <div id="loginMenu">
+            </div>
+            <div class="clear"></div>
+
+
+            <div id="menucontainer">
+                <ul id="menu">
+                    <li>
+                        <a href="#">Item</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="main" ng-controller="HomeController">
+            <div>
+
+                {{messages}}
+            </div>
+
+
+            <section id="postMessage">
+                <div id="message-form">
+                    <div>Type
+                    your
+                    message
+                    below:</div>
+                    <div id="message-text-container">
+                        <textarea id="new-message-text" name="messageText"></textarea>
+                        <input type="submit" id="message-submit-button" value="Send"/>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="siteFooter">
+            Copyright &copy; Stamo Gochev - 2015
+        </div>
+    </div>
 
 
     <script src="libs/jquery/dist/jquery.js"></script>
