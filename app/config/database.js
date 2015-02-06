@@ -1,3 +1,3 @@
 module.exports = {
-    url : "mongodb://localhost/newsfeed_db_2"
+    url : "mongodb://127.0.0.1/newsfeed_db_2"
 };

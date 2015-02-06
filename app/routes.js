@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    var User = require("./models/User");
+    var User = require("./models/user");
     var Message = require("./models/Message");
 
     module.exports = function(app, passport) {
@@ -22,6 +22,23 @@
             // render the page and pass in any flash data if it exists
             res.render('signup.ejs', { message: req.flash('signupMessage') });
         });
+
+        app.get('/profile', isLoggedIn, function(req, res) {
+            res.render('profile.ejs', {
+                user : req.user // get the user out of session and pass to template
+            });
+        });
+
+        app.get('/auth/twitter', passport.authenticate('twitter'));
+
+        // handle the callback after twitter has authenticated the user
+        app.get('/auth/twitter/callback',
+            passport.authenticate('twitter', {
+                //successRedirect : '/profile',
+                successRedirect : '/api/messages',
+                failureRedirect : '/'
+            })
+        );
 
         app.get("/api/messages", function(request, response) {
 
@@ -61,7 +78,7 @@
         app.post("/addUser", function(request, response) {
             var name = request.param("name");
             var age = request.param("age");
-            var newUser = new User({
+            var newUser = new user({
                 name: name,
                 age: age
             });

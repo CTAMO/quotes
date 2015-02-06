@@ -5,6 +5,8 @@
     <title>.:: Quotes ::.</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/messages.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
 </head>
 <body ng-app="quotesApp">
 
@@ -31,6 +33,8 @@
             </div>
         </div>
         <div id="main" ng-controller="HomeController">
+
+            <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
             <div>
 
                 {{messages}}
@@ -56,7 +60,6 @@
             Copyright &copy; Stamo Gochev - 2015
         </div>
     </div>
-
 
     <script src="libs/jquery/dist/jquery.js"></script>
     <script src="libs/angular/angular.js"></script>
