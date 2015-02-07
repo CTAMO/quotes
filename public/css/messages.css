@@ -61,7 +61,7 @@
 }
 
 .message-text {
-    background-color: #C9D9EB;
+    background-color: #EBF1F8;
     border: #425E81 dotted 1px;
     /*border-radius: 10px;*/
     /*margin: 17px;
@@ -71,7 +71,9 @@
     padding: 10px;
     word-wrap: break-word;
     text-align: left;
+    font-size: 1.5em;
 }
+
 /* Notification messages */
 .messageInfo, .messageSuccess, .messageError {
     border: 1px solid;
@@ -171,7 +173,11 @@
     background-size: 24px 24px;
 }
 
-#pager
-{
-    float: left;
+#postMessage {
+    margin-top: 16px;
+}
+
+#pager {
+    margin-top: 16px;
+    border: 1px solid red;
 }

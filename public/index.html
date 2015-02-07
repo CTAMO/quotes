@@ -32,20 +32,41 @@
                 </ul>
             </div>
         </div>
-        <div id="main" ng-controller="HomeController">
+        <div id="main" ng-controller="MessagesController">
 
             <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-            <div>
-                {{messages}}
+            <div id="messages" ng-repeat="message in messages">
+                <article class="message">
+                    <div class="message-info">
+                        <div class="message-author">
+						<span>image</span>
+                            <strong>{{message.AuthorUsername}}</strong>
+
+                            <a data-mutestatus="@message.IsAuthorMuted" class="mute-status muted"
+                               data-usernametobemuted="@message.AuthorUsername"></a>
+                        </div>
+                        <div class="message-date-created">
+                            Date: <strong>{{message.DateCreated}}</strong>
+                        </div>
+                        <div class="message-votes">
+                            <button class="vote-up" data-messageid="@message.Id"></button>
+						<span class="message-votes-count" id="message-votes-count_@message.Id">
+							3 votes
+						</span>
+                            <button class="vote-down" data-messageid="@message.Id"></button>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="message-text">{{message.Text}}</div>
+                </article>
             </div>
 
+            <div id="pager">Pager</div>
 
-            <section id="postMessage">
+
+            <div id="postMessage">
                 <div id="message-form">
-                    <div>Type
-                    your
-                    message
-                    below:</div>
+                    <div>Type your message below:</div>
                     <div id="message-text-container">
                         <textarea id="new-message-text" name="messageText"></textarea>
                         <input type="submit" id="message-submit-button" value="Send"/>
@@ -66,7 +87,7 @@
     <script src="app.js"></script>
     <script src="routes.js"></script>
     <script src="components/home/MessagesService.js"></script>
-    <script src="components/home/HomeController.js"></script>
+    <script src="components/home/MessagesController.js"></script>
 
 </body>
 </html>

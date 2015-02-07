@@ -7,7 +7,7 @@
 
     function  MessagesService($http) {
         return {
-            get: function() {
+            getMessages: function() {
                 return $http.get("/api/messages");
             }
         };

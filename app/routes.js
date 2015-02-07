@@ -53,7 +53,7 @@
                 else {
                     console.log("data is retrieved");
                     response.send({
-                        data: data
+                        messages: data
                     });
                 }
             });
