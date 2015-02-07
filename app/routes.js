@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    var User = require("./models/user");
+    var User = require("./models/User");
     var Message = require("./models/Message");
 
     module.exports = function(app, passport) {
@@ -9,7 +9,9 @@
         app.get('/login', function(req, res) {
 
             // render the page and pass in any flash data if it exists
-            res.render('login.html', { message: req.flash('loginMessage') });
+            res.render('login.html', {
+                message: req.flash('loginMessage')
+            });
         });
 
         app.get('/logout', function(req, res) {
@@ -20,12 +22,14 @@
         app.get('/signup', function(req, res) {
 
             // render the page and pass in any flash data if it exists
-            res.render('signup.ejs', { message: req.flash('signupMessage') });
+            res.render('signup.ejs', {
+                message: req.flash('signupMessage')
+            });
         });
 
-        app.get('/profile', isLoggedIn, function(req, res) {
-            res.render('profile.ejs', {
-                user : req.user // get the user out of session and pass to template
+        app.get('/profile', isLoggedIn, function(request, response) {
+            response.render('profile.html', {
+                user : request.user // get the user out of session and pass to template
             });
         });
 
@@ -34,8 +38,8 @@
         // handle the callback after twitter has authenticated the user
         app.get('/auth/twitter/callback',
             passport.authenticate('twitter', {
-                //successRedirect : '/profile',
-                successRedirect : '/api/messages',
+                successRedirect : '/profile',
+                //successRedirect : '/api/messages',
                 failureRedirect : '/'
             })
         );
@@ -130,15 +134,15 @@
     };
 
     // route middleware to make sure a user is logged in
-    function isLoggedIn(req, res, next) {
+    function isLoggedIn(request, response, next) {
 
         // if user is authenticated in the session, carry on
-        if (req.isAuthenticated()) {
+        if (request.isAuthenticated()) {
             return next();
         }
 
         // if they aren't redirect them to the home page
-        res.redirect('/');
+        response.redirect('/');
     }
 })();
 

@@ -1,7 +1,7 @@
 var TwitterStrategy = require("passport-twitter").Strategy;
 
 // load up the user model
-var User = require("../models/user");
+var User = require("../models/User");
 
 // load the auth variables
 var configAuth = require("./auth");
@@ -57,15 +57,19 @@ module.exports = function(passport) {
                         var newUser = new User();
 
                         // set all of the user data that we need
-                        newUser.twitter.id = profile.id;
-                        newUser.twitter.token = token;
-                        newUser.twitter.username = profile.username;
-                        newUser.twitter.displayName = profile.displayName;
+                        //newUser.twitter.id = profile.id;
+                        //newUser.twitter.token = token;
+                        //newUser.twitter.username = profile.username;
+                        //newUser.twitter.displayName = profile.displayName;
+
+                        newUser.Username = profile.username;
+                        //newUser.displayName = profile.displayName;
 
                         // save our user into the database
                         newUser.save(function(err) {
-                            if (err)
+                            if (err) {
                                 throw err;
+                            }
                             return done(null, newUser);
                         });
                     }
