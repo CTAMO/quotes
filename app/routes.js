@@ -65,6 +65,16 @@
             //});
         });
 
+        app.post("/api/messages/add", function(request, response) {
+            var messageText = request.body.messageText;
+
+
+            console.log("message added: " + messageText);
+            response.send({
+                data: messageText
+            });
+        });
+
 
         app.post("/send", function(request, response) {
             var name = request.param("name");

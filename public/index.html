@@ -65,15 +65,15 @@
 
 
             <div id="postMessage">
-                <div id="message-form">
-                    <div>Type your message below:</div>
+                <form id="message-form" ng-submit="addMessage(text)">
+                    <label for="new-message-text">Type your message below:</label>
                     <div id="message-text-container">
-                        <textarea id="new-message-text" name="messageText"></textarea>
+                        <textarea id="new-message-text" ng-model="text"></textarea>
                         <input type="submit" id="message-submit-button" value="Send"/>
 
                         <div class="clear"></div>
                     </div>
-                </div>
+                </form>
             </section>
         </div>
         <div id="siteFooter">
@@ -86,8 +86,8 @@
     <script src="libs/angular-route/angular-route.js"></script>
     <script src="app.js"></script>
     <script src="routes.js"></script>
-    <script src="components/home/MessagesService.js"></script>
-    <script src="components/home/MessagesController.js"></script>
+    <script src="components/MessagesService.js"></script>
+    <script src="components/MessagesController.js"></script>
 
 </body>
 </html>
