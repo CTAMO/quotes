@@ -1,14 +1,15 @@
 
 (function() {
     "use strict";
-    var mongoose = require("mongoose");
 
+    var mongoose = require("mongoose");
     var messageSchema = mongoose.Schema({
-        authorUsername: String
+        authorUsername: String,
+        Text: String
     });
 
-    var Message = mongoose.model("Message", messageSchema);
+    //var Message = mongoose.model("Message", messageSchema);
 
 
-    module.exports = Message;
+    module.exports = mongoose.model("Message", messageSchema);
 })();

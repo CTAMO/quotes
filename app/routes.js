@@ -67,12 +67,16 @@
 
         app.post("/api/messages/add", function(request, response) {
             var messageText = request.body.messageText;
+            var newMessage = new Message({
+                Text: messageText
+            });
 
 
             console.log("message added: " + messageText);
             response.send({
                 data: messageText
             });
+
         });
 
 
