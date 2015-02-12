@@ -26,7 +26,7 @@
                 .error(function(data, status, headers, config) {
                     console.log("error when adding message: " + data);
                 });
-
+            console.log("addMessage called");
             //$http({
             //    url: "/api/messages/add",
             //    method: "POST",

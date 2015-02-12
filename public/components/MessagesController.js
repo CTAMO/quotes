@@ -4,28 +4,32 @@
     angular.module("quotesApp")
         .controller("MessagesController", MessagesController);
 
-    MessagesController.$inject = ["$scope", "MessagesService"];
+    MessagesController.$inject = ["$scope", "MessagesService", "$interval"];
 
-    function MessagesController($scope, MessagesService) {
+    function MessagesController($scope, MessagesService, $interval) {
         var controller = this;
 
         controller.getMessages = getMessages;
         //controller.addMessage = addMessage;
 
-        controller.getMessages();
+        $interval(function() {
+            controller.getMessages();
+        }, 100);
 
         function getMessages() {
             MessagesService.getMessages()
                 .success(function(result) {
+                    console.log('Count: ' + result.messages.length);
                     $scope.messages = result.messages;
                 })
-                .error(function(data) {
-                    console.log('Error: ' + data);
+                .error(function(error) {
+                    console.log('Error: ' + error);
                 });
         }
 
         $scope.addMessage = function addMessage() {
             MessagesService.addMessage($scope.text);
+            $scope.text = "";
         };
     }
 })();

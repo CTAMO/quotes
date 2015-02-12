@@ -51,7 +51,7 @@
                     console.log("an error has occurred");
                 }
                 else {
-                    console.log("data is retrieved");
+                    //console.log("data is retrieved");
                     response.send({
                         messages: data
                     });
@@ -76,6 +76,10 @@
             response.send({
                 data: messageText
             });
+
+            //response.send({
+            //    data: messageText
+            //});
 
         });
 

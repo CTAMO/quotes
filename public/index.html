@@ -40,7 +40,7 @@
                     <div class="message-info">
                         <div class="message-author">
 						<span>image</span>
-                            <strong>{{message.AuthorUsername}}</strong>
+                            <strong>{{message.AuthorUsername}}:</strong>
 
                             <a data-mutestatus="@message.IsAuthorMuted" class="mute-status muted"
                                data-usernametobemuted="@message.AuthorUsername"></a>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="clear"></div>
-                    <div class="message-text">{{message.Text}}</div>
+                    <div class="message-text">"{{message.Text}}"</div>
                 </article>
             </div>
 
@@ -66,7 +66,7 @@
 
             <div id="postMessage">
                 <form id="message-form" ng-submit="addMessage(text)">
-                    <label for="new-message-text">Type your message below:</label>
+                    <label for="new-message-text">Type your inspiring quote:</label>
                     <div id="message-text-container">
                         <textarea id="new-message-text" ng-model="text"></textarea>
                         <input type="submit" id="message-submit-button" value="Send"/>
