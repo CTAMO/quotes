@@ -14,7 +14,7 @@
 
         $scope.filteredTodos = []
             ,$scope.currentPage = 1
-            ,$scope.numPerPage = 2
+            ,$scope.itemsPerPage = 2
             ,$scope.maxSize = 5;
 
 
@@ -32,27 +32,48 @@
                     console.log('Count: ' + result.messages.length);
                     $scope.messages = result.messages;
 
-                    $scope.numPages = function () {
-                        return Math.ceil($scope.messages.length / $scope.numPerPage);
+                    //$scope.numPages = function () {
+                    //    return Math.ceil($scope.messages.length / $scope.numPerPage);
+                    //};
+                    //
+                    //
+                    //$scope.$watch('currentPage + itemsPerPage', function() {
+                    //    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                    //        , end = begin + $scope.numPerPage;
+                    //
+                    //    $scope.someMessages = $scope.messages.slice(begin, end);
+                    //});
+
+                    $scope.someMessages = [];
+                    $scope.itemsPerPage = 2;
+                    $scope.currentPage = 1;
+
+                    //$scope.makeTodos = function() {
+                    //    $scope.todos = [];
+                    //    for (i=1;i<=1000;i++) {
+                    //        $scope.todos.push({ text:'todo '+i, done:false});
+                    //    }
+                    //};
+
+                    $scope.figureOutTodosToDisplay = function() {
+                        var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+                        var end = begin + $scope.itemsPerPage;
+                        $scope.someMessages = result.messages.slice(begin, end);
                     };
 
-                    $scope.$watch('currentPage + numPerPage', function() {
-                        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-                            , end = begin + $scope.numPerPage;
+                    //$scope.makeTodos();
+                    $scope.figureOutTodosToDisplay();
 
-                        $scope.someMessages = $scope.messages.slice(begin, end);
-                    });
+                    $scope.pageChanged = function() {
+                        $scope.figureOutTodosToDisplay();
+                    };
+
                 })
                 .error(function(error) {
                     console.log('Error: ' + error);
                 });
         }
 
-
-
-
-
-        $scope.getMessages = getMessages;
         $scope.addMessage = function addMessage() {
             MessagesService.addMessage($scope.text);
             $scope.text = "";

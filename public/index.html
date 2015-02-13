@@ -3,10 +3,10 @@
 <!--<head>-->
     <meta charset="UTF-8">
     <title>.:: Quotes ::.</title>
+
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/messages.css">
     <link rel="stylesheet" href="css/bootstrap-mock.css">
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
 </head>
 <body ng-app="quotesApp">
 
@@ -51,7 +51,7 @@
                         <div class="message-votes">
                             <button class="vote-up" data-messageid="@message.Id"></button>
 						<span class="message-votes-count" id="message-votes-count_@message.Id">
-							3 votes
+							{{message.Likes.length || 0}}  votes
 						</span>
                             <button class="vote-down" data-messageid="@message.Id"></button>
                         </div>
@@ -63,9 +63,18 @@
 
             <!--<div id="pager">Pager</div>-->
 
-            <div data-pagination="" data-num-pages="numPages()"
-                 data-current-page="currentPage" data-max-size="maxSize"
-                 data-boundary-links="true"></div>
+            <!--<div class="pagination" data-pagination="" data-num-pages="numPages()"-->
+                 <!--data-current-page="currentPage" data-max-size="maxSize"-->
+                 <!--data-boundary-links="true"></div>-->
+            <div id="pager">
+                <pagination boundary-links="true"
+                            max-size="3"
+                            items-per-page="itemsPerPage"
+                            total-items="messages.length"
+                            ng-model="currentPage"
+                            ng-change="pageChanged()"></pagination>
+            </div>
+
 
             <div id="postMessage">
                 <form id="message-form" ng-submit="addMessage(text)">
@@ -100,8 +109,7 @@
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-route/angular-route.js"></script>
     <script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
-    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
 
 
     <script src="app.js"></script>
