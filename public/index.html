@@ -11,7 +11,7 @@
 <body ng-app="quotesApp">
 
 
-    <div class="page">
+    <div class="page"  ng-controller="MessagesController">
         <div id="header">
             <div id="title">
                 <h1 class="logo">Quotes</h1>
@@ -35,7 +35,7 @@
         <div id="main" ng-controller="MessagesController">
 
             <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-            <div id="messages" ng-repeat="message in messages">
+            <div id="messages" ng-repeat="message in someMessages">
                 <article class="message">
                     <div class="message-info">
                         <div class="message-author">
@@ -61,8 +61,11 @@
                 </article>
             </div>
 
-            <div id="pager">Pager</div>
+            <!--<div id="pager">Pager</div>-->
 
+            <div data-pagination="" data-num-pages="numPages()"
+                 data-current-page="currentPage" data-max-size="maxSize"
+                 data-boundary-links="true"></div>
 
             <div id="postMessage">
                 <form id="message-form" ng-submit="addMessage(text)">
@@ -81,9 +84,26 @@
         </div>
     </div>
 
+        <!--<div ng-controller="MessagesController">-->
+            <!--<h1>Todos</h1>-->
+            <!--<h4>{{todos.length}} remain</h4>-->
+            <!--<ul>-->
+                <!--<li ng-repeat="todo in filteredTodos">{{todo.text}}</li>-->
+            <!--</ul>-->
+            <!--<div data-pagination="" data-num-pages="numPages()"-->
+                 <!--data-current-page="currentPage" data-max-size="maxSize"-->
+                 <!--data-boundary-links="true"></div>-->
+        <!--</div>-->
+
+
     <script src="libs/jquery/dist/jquery.js"></script>
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-route/angular-route.js"></script>
+    <script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+
+
+
     <script src="app.js"></script>
     <script src="routes.js"></script>
     <script src="components/MessagesService.js"></script>

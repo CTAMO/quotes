@@ -72,14 +72,15 @@
             });
 
 
-            console.log("message added: " + messageText);
-            response.send({
-                data: messageText
-            });
 
-            //response.send({
-            //    data: messageText
-            //});
+            newMessage.save(function(error) {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log("message added: " + messageText);
+                }
+            });
 
         });
 

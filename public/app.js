@@ -2,6 +2,6 @@
     "use strict";
 
     angular
-        .module("quotesApp", ["ngRoute"]);
+        .module("quotesApp", ["ngRoute", "ui.bootstrap"]);
 })();
 
