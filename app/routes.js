@@ -66,12 +66,10 @@
         });
 
         app.post("/api/messages/add", function(request, response) {
-            var messageText = request.body.messageText;
+            var messageText = request.body.messageText.trim();
             var newMessage = new Message({
                 Text: messageText
             });
-
-
 
             newMessage.save(function(error) {
                 if (error) {
@@ -81,7 +79,13 @@
                     console.log("message added: " + messageText);
                 }
             });
+        });
 
+        app.post("/api/messages/voteup", function(request, response) {
+            var messageId = request.body.messageId;
+
+            Message.voteUp(messageId);
+            console.log("server message voted up " + messageId);
         });
 
 

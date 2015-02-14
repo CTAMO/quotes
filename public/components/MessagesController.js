@@ -12,10 +12,10 @@
         controller.getMessages = getMessages;
         //controller.addMessage = addMessage;
 
-        $scope.filteredTodos = []
-            ,$scope.currentPage = 1
-            ,$scope.itemsPerPage = 2
-            ,$scope.maxSize = 5;
+
+        //$scope.currentPage = 1,
+        //$scope.itemsPerPage = 2,
+        //$scope.maxSize = 5;
 
 
 
@@ -24,48 +24,26 @@
             //controller.getMessages();
         }, 500);
 
-        controller.getMessages();
-
         function getMessages() {
             MessagesService.getMessages()
                 .success(function(result) {
                     console.log('Count: ' + result.messages.length);
                     $scope.messages = result.messages;
 
-                    //$scope.numPages = function () {
-                    //    return Math.ceil($scope.messages.length / $scope.numPerPage);
-                    //};
-                    //
-                    //
-                    //$scope.$watch('currentPage + itemsPerPage', function() {
-                    //    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-                    //        , end = begin + $scope.numPerPage;
-                    //
-                    //    $scope.someMessages = $scope.messages.slice(begin, end);
-                    //});
-
                     $scope.someMessages = [];
                     $scope.itemsPerPage = 2;
                     $scope.currentPage = 1;
 
-                    //$scope.makeTodos = function() {
-                    //    $scope.todos = [];
-                    //    for (i=1;i<=1000;i++) {
-                    //        $scope.todos.push({ text:'todo '+i, done:false});
-                    //    }
-                    //};
-
-                    $scope.figureOutTodosToDisplay = function() {
+                    $scope.getMessagesToDisplay = function() {
                         var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
                         var end = begin + $scope.itemsPerPage;
                         $scope.someMessages = result.messages.slice(begin, end);
                     };
 
-                    //$scope.makeTodos();
-                    $scope.figureOutTodosToDisplay();
+                    $scope.getMessagesToDisplay();
 
                     $scope.pageChanged = function() {
-                        $scope.figureOutTodosToDisplay();
+                        $scope.getMessagesToDisplay();
                     };
 
                 })
@@ -74,33 +52,17 @@
                 });
         }
 
-        $scope.addMessage = function addMessage() {
-            MessagesService.addMessage($scope.text);
-            $scope.text = "";
-        };
+        $scope.addMessage = addMessage;
+        $scope.voteUpForMessage = voteUpForMessage;
 
-        //$scope.filteredTodos = []
-        //    ,$scope.currentPage = 1
-        //    ,$scope.numPerPage = 10
-        //    ,$scope.maxSize = 5;
-        //
-        //$scope.makeTodos = function() {
-        //    $scope.todos = [];
-        //    for (var i=1;i<=1000;i++) {
-        //        $scope.todos.push({ text:'todo '+i, done:false});
-        //    }
-        //};
-        //$scope.makeTodos();
-        //
-        //$scope.numPages = function () {
-        //    return Math.ceil($scope.todos.length / $scope.numPerPage);
-        //};
-        //
-        //$scope.$watch('currentPage + numPerPage', function() {
-        //    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-        //        , end = begin + $scope.numPerPage;
-        //
-        //    $scope.filteredTodos = $scope.todos.slice(begin, end);
-        //});
+        function voteUpForMessage(messageId) {
+            console.log("controller vote up");
+            MessagesService.voteUpForMessage(messageId);
+        }
+
+        function addMessage(newMessagetext) {
+            MessagesService.addMessage(newMessagetext);
+            $scope.newMessagetext = "";
+        }
     }
 })();

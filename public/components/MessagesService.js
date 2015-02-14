@@ -7,7 +7,8 @@
     function MessagesService($http) {
         var service = {
             getMessages: getMessages,
-            addMessage: addMessage
+            addMessage: addMessage,
+            voteUpForMessage: voteUpForMessage
 
         };
         return service;
@@ -27,11 +28,21 @@
                     console.log("error when adding message: " + data);
                 });
             console.log("addMessage called");
-            //$http({
-            //    url: "/api/messages/add",
-            //    method: "POST",
-            //    data: { 'text' : text }
-            //});
+        }
+
+        function voteUpForMessage(messageId) {
+
+
+            $http.post("/api/messages/voteup", {
+                    messageId: messageId
+                })
+                .success(function(data, status, headers, config) {
+                    console.log(data);
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("error when voting up for message: " + data);
+                });
+            console.log("client message voted up " + messageId);
         }
 
     }
