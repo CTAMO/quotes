@@ -74,8 +74,8 @@
                 <form id="message-form" ng-submit="addMessage(newMessagetext)">
                     <label for="new-message-text">Type your inspiring quote:</label>
                     <div id="message-text-container">
-                        <textarea id="new-message-text" ng-model="newMessagetext"></textarea>
-                        <input type="submit" id="message-submit-button" value="Send" />
+                        <textarea id="new-message-text" ng-model="newMessagetext" required="required"></textarea>
+                        <input type="submit" id="message-submit-button" value="Send" ng-disabled="message-form.$invalid" />
 
                         <div class="clear"></div>
                     </div>
