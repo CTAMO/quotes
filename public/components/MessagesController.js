@@ -20,6 +20,7 @@
 
         $scope.addMessage = addMessage;
         $scope.voteUpForMessage = voteUpForMessage;
+        $scope.voteDownForMessage = voteDownForMessage;
         $scope.logout = logout;
 
         function activate() {
@@ -59,6 +60,11 @@
         function voteUpForMessage(messageId) {
             console.log("controller vote up");
             MessagesService.voteUpForMessage(messageId);
+        }
+
+        function voteDownForMessage(messageId) {
+            console.log("controller vote up");
+            MessagesService.voteDownForMessage(messageId);
         }
 
         function addMessage(newMessagetext) {

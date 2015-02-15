@@ -57,7 +57,7 @@
                             <span class="message-votes-count">
                                 {{message.Likes.length || 0}} votes
                             </span>
-                            <button class="vote-down"></button>
+                            <button ng-click="voteDownForMessage(message._id)" class="vote-down"></button>
                         </div>
                     </div>
                     <div class="clear"></div>

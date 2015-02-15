@@ -19,6 +19,7 @@
 
     messageSchema.statics.add = add;
     messageSchema.statics.voteUp = voteUp;
+    messageSchema.statics.voteDown = voteDown;
 
     function add(messageText, authorUsername) {
         var newMessage = new this();
@@ -40,6 +41,15 @@
         this.findById(messageId, function(error, message) {
             if (message && message.Likes && message.Likes.indexOf(voterUsername) === NOT_FOUND) {
                 message.Likes.push(voterUsername);
+                message.save();
+            }
+        });
+    }
+
+    function voteDown(messageId, voterUsername) {
+        this.findById(messageId, function(error, message) {
+            if (message && message.Likes && message.Likes.indexOf(voterUsername) !== NOT_FOUND) {
+                message.Likes.splice(message.Likes.indexOf(voterUsername), 1);
                 message.save();
             }
         });

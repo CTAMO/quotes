@@ -38,7 +38,6 @@
         // handle the callback after twitter has authenticated the user
         app.get("/auth/twitter/callback",
             passport.authenticate("twitter", {
-                //successRedirect : "/profile",
                 successRedirect : "/",
                 failureRedirect : "/login"
             })
@@ -77,6 +76,13 @@
             var messageId = request.body.messageId;
 
             Message.voteUp(messageId, request.user.Username);
+            console.log("server message voted up " + messageId);
+        });
+
+        app.post("/api/messages/votedown", isLoggedIn, function(request, response) {
+            var messageId = request.body.messageId;
+
+            Message.voteDown(messageId, request.user.Username);
             console.log("server message voted up " + messageId);
         });
 

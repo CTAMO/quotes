@@ -8,8 +8,8 @@
         var service = {
             getMessages: getMessages,
             addMessage: addMessage,
-            voteUpForMessage: voteUpForMessage
-
+            voteUpForMessage: voteUpForMessage,
+            voteDownForMessage: voteDownForMessage
         };
         return service;
 
@@ -34,6 +34,19 @@
             $http.post("/api/messages/voteup", {
                     messageId: messageId
                 })
+                .success(function(data, status, headers, config) {
+                    console.log(data);
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("error when voting up for message: " + data);
+                });
+            console.log("client message voted up " + messageId);
+        }
+
+        function voteDownForMessage(messageId) {
+            $http.post("/api/messages/votedown", {
+                messageId: messageId
+            })
                 .success(function(data, status, headers, config) {
                     console.log(data);
                 })
