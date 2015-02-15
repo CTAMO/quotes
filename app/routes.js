@@ -82,11 +82,11 @@
                     access_token_secret: configAuth.twitterAuth.accessTokenSecret
                 });
 
-                newTweet.post('statuses/update', { status: messageText }, function(error, data, response) {
-                    if (error) {
-                        console.log(error);
-                    }
-                });
+                //newTweet.post('statuses/update', { status: messageText }, function(error, data, response) {
+                //    if (error) {
+                //        console.log(error);
+                //    }
+                //});
 
             }
         });

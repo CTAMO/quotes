@@ -50,7 +50,7 @@
                                data-usernametobemuted="{{message.AuthorUsername}}"></a>
                         </div>
                         <div class="message-date-created">
-                            Date: <strong>{{message.DateCreated}}</strong>
+                            Date: <strong>{{message.DateCreated | date:'yyyy-MM-dd HH:mm:ss'}}</strong>
                         </div>
                         <div class="message-votes">
                             <button ng-click="voteUpForMessage(message._id)" class="vote-up"></button>
