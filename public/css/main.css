@@ -411,3 +411,7 @@ fieldset ul li {
     cursor: pointer;
     margin-left: 8px;
 }
+
+.opacity50 {
+    opacity: 0.5;
+}

@@ -19,13 +19,13 @@
         //    response.redirect("/");
         //});
 
-        app.get("/signup", function(request, response) {
-
-            // render the page and pass in any flash data if it exists
-            response.render("signup.html", {
-                message: request.flash("signupMessage")
-            });
-        });
+        //app.get("/signup", function(request, response) {
+        //
+        //    // render the page and pass in any flash data if it exists
+        //    response.render("signup.html", {
+        //        message: request.flash("signupMessage")
+        //    });
+        //});
 
         app.get("/profile", isLoggedIn, function(request, response) {
             response.render("profile.html", {
@@ -65,7 +65,7 @@
             //});
         });
 
-        app.post("/api/messages/add", function(request, response) {
+        app.post("/api/messages/add", isLoggedIn, function(request, response) {
             var messageText = request.body.messageText.trim();
 
             if (messageText) {
@@ -73,7 +73,7 @@
             }
         });
 
-        app.post("/api/messages/voteup", function(request, response) {
+        app.post("/api/messages/voteup", isLoggedIn, function(request, response) {
             var messageId = request.body.messageId;
 
             Message.voteUp(messageId);
@@ -92,46 +92,9 @@
             }
         });
 
-        app.get("/api/user/logout", function(request, response) {
+        app.get("/api/user/logout", isLoggedIn, function(request, response) {
             request.logout();
             response.redirect("/");
-        });
-
-        app.post("/send", function(request, response) {
-            var name = request.param("name");
-
-            //response.send({
-            //    information: name
-            //});
-            console.log(name);
-
-            response.send({
-                info: name
-            });
-        });
-
-        app.post("/addUser", function(request, response) {
-            var name = request.param("name");
-            var age = request.param("age");
-            var newUser = new user({
-                name: name,
-                age: age
-            });
-
-            newUser.save(function(error, newUser) {
-                if (error) {
-                    console.log(error);
-                }
-                else {
-                    response.send({
-                        newUser: newUser
-                    });
-                }
-            });
-
-
-            console.log("updated");
-
         });
 
         //app.get("*", function(request, response) {
