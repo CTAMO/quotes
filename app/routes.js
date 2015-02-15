@@ -67,18 +67,10 @@
 
         app.post("/api/messages/add", function(request, response) {
             var messageText = request.body.messageText.trim();
-            var newMessage = new Message({
-                Text: messageText
-            });
 
-            newMessage.save(function(error) {
-                if (error) {
-                    console.log(error);
-                }
-                else {
-                    console.log("message added: " + messageText);
-                }
-            });
+            if (messageText) {
+                Message.add(messageText);
+            }
         });
 
         app.post("/api/messages/voteup", function(request, response) {

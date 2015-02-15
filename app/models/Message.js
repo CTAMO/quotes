@@ -7,7 +7,7 @@
     var NOT_FOUND = -1;
     var username = "gundars";
 
-    var messageSchema = mongoose.Schema({
+    var messageSchema = new Schema({
         _id: Schema.ObjectId,
         AuthorUsername: String,
         Text: String,
@@ -18,15 +18,34 @@
         Likes: Array
     });
 
-    messageSchema.statics.voteUp = function(messageId) {
+    messageSchema.statics.add = add;
+    messageSchema.statics.voteUp = voteUp;
+
+    function add(messageText) {
+        var newMessage = new this();
+        newMessage._id = new mongoose.Types.ObjectId();
+        newMessage.Text = messageText;
+        newMessage.save(function(error) {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log("message added: " + messageText);
+                return newMessage;
+            }
+        });
+    }
+
+    function voteUp(messageId) {
         this.findById(messageId, function(error, message) {
             if (message && message.Likes && message.Likes.indexOf(username) === NOT_FOUND) {
                 message.Likes.push(username);
                 message.save();
             }
         });
+    }
 
 
-    };
+
     module.exports = mongoose.model("Message", messageSchema);
 })();
