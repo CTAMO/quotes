@@ -50,9 +50,12 @@
                     console.log("an error has occurred");
                 }
                 else {
+                    var messagesSortedByDate = data.sort(function(message1, message2) {
+                        return ((-1) * (message1.DateCreated - message2.DateCreated));
+                    });
                     //console.log("data is retrieved");
                     response.send({
-                        messages: data
+                        messages: messagesSortedByDate
                     });
                 }
             });

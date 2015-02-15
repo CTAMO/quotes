@@ -55,7 +55,5 @@
         });
     }
 
-
-
     module.exports = mongoose.model("Message", messageSchema);
 })();
