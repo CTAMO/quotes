@@ -4,9 +4,9 @@
     angular.module("quotesApp")
         .controller("MessagesController", MessagesController);
 
-    MessagesController.$inject = ["$scope", "$interval", "MessagesService", "UsersService"];
+    MessagesController.$inject = ["$scope", "$interval", "MessagesService"];
 
-    function MessagesController($scope, $interval, MessagesService, UsersService) {
+    function MessagesController($scope, $interval, MessagesService) {
         var controller = this;
 
         controller.getMessages = getMessages;
@@ -43,15 +43,6 @@
                 .error(function(error) {
                     console.log('Error: ' + error);
                 });
-
-            UsersService.getUser()
-                .success(function(result) {
-                    $scope.user = result.user;
-                })
-                .error(function(error) {
-                    console.log('Error getting user: ' + error);
-                });
-
         }
 
         $scope.addMessage = addMessage;

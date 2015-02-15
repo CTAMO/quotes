@@ -11,29 +11,23 @@
 <body ng-app="quotesApp">
 
 
-    <div class="page"  ng-controller="MessagesController">
+    <div class="page">
         <div id="header">
             <div id="title">
                 <h1 class="logo">Quotes</h1>
             </div>
-            <div id="logindisplay">
-                <ul>
-                    <li>
-                        Login or sign up with
-                        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span>Twitter</a>
-                    </li>
-                    <li>
-                        <strong>username</strong>: {{user.Username || "no name"}}<br>
-                    </li>
-                </ul>
-                <div id="loggedUser">
+            <div id="logindisplay" ng-controller="UsersController">
+                <div ng-show="!user">
+                    Login or sign up with
+                    <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span>Twitter</a>
+                </div>
 
+                <div ng-show="user">
+                    Hi, {{user.Username}}
+                    <button id="logout-button" ng-click="logout()">Logout</button>
                 </div>
             </div>
 
-
-            <div id="loginMenu">
-            </div>
             <div class="clear"></div>
 
 
@@ -45,10 +39,8 @@
                 </ul>
             </div>
         </div>
-        <div id="main">
-
-
-            <div id="messages" ng-repeat="message in someMessages">
+        <div id="main" ng-controller="MessagesController">
+            <div id="messages"  ng-repeat="message in someMessages">
                 <article class="message">
                     <div class="message-info">
                         <div class="message-author">
@@ -82,7 +74,6 @@
                             ng-change="pageChanged()"></pagination>
             </div>
 
-
             <div id="postMessage">
                 <form id="message-form" ng-submit="addMessage(newMessagetext)">
                     <label for="new-message-text">Type your inspiring quote:</label>
@@ -112,6 +103,7 @@
     <script src="../routes.js"></script>
     <script src="../components/UsersService.js"></script>
     <script src="../components/MessagesService.js"></script>
+    <script src="../components/UsersController.js"></script>
     <script src="../components/MessagesController.js"></script>
 
 </body>

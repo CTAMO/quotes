@@ -6,41 +6,41 @@
 
     module.exports = function(app, passport) {
 
-        app.get('/login', function(req, res) {
+        app.get("/login", function(request, response) {
 
             // render the page and pass in any flash data if it exists
-            res.render('login.html', {
-                message: req.flash('loginMessage')
+            response.render("login.html", {
+                message: request.flash("loginMessage")
             });
         });
 
-        app.get('/logout', function(req, res) {
-            req.logout();
-            res.redirect('/');
-        });
+        //app.get("/logout", function(request, response) {
+        //    request.logout();
+        //    response.redirect("/");
+        //});
 
-        app.get('/signup', function(req, res) {
+        app.get("/signup", function(request, response) {
 
             // render the page and pass in any flash data if it exists
-            res.render('signup.html', {
-                message: req.flash('signupMessage')
+            response.render("signup.html", {
+                message: request.flash("signupMessage")
             });
         });
 
-        app.get('/profile', isLoggedIn, function(request, response) {
-            response.render('profile.html', {
+        app.get("/profile", isLoggedIn, function(request, response) {
+            response.render("profile.html", {
                 user : request.user // get the user out of session and pass to template
             });
         });
 
-        app.get('/auth/twitter', passport.authenticate('twitter'));
+        app.get("/auth/twitter", passport.authenticate("twitter"));
 
         // handle the callback after twitter has authenticated the user
-        app.get('/auth/twitter/callback',
-            passport.authenticate('twitter', {
-                //successRedirect : '/profile',
-                successRedirect : '/',
-                failureRedirect : '/login'
+        app.get("/auth/twitter/callback",
+            passport.authenticate("twitter", {
+                //successRedirect : "/profile",
+                successRedirect : "/",
+                failureRedirect : "/login"
             })
         );
 
@@ -81,7 +81,7 @@
         });
 
 
-        app.get('/api/user', function(request, response){
+        app.get("/api/user", function(request, response){
             if (request.isAuthenticated()) {
                 response.send({
                     user: request.user
@@ -90,6 +90,11 @@
             else {
                 var a = 10;
             }
+        });
+
+        app.get("/api/user/logout", function(request, response) {
+            request.logout();
+            response.redirect("/");
         });
 
         app.post("/send", function(request, response) {
@@ -158,8 +163,8 @@
         //    //response.sendFile("./public/index.html"); // load the single view file (angular will handle the page changes on the front-end)
         //});
 
-        app.get('/', function(req, res) {
-            res.render('index.html');
+        app.get("/", function(request, response) {
+            response.render("index.html");
         });
     };
 
@@ -171,8 +176,8 @@
             return next();
         }
 
-        // if they aren't redirect them to the home page
-        response.redirect('/');
+        // if they aren"t redirect them to the home page
+        response.redirect("/");
     }
 })();
 

@@ -246,7 +246,7 @@ div#title {
     font-size: 1.1em;
     display: block;
     text-align: right;
-    margin: 10px;
+    margin: 10px 0 0 0;
     color: White;
 }
 
@@ -261,6 +261,8 @@ div#title {
 #logindisplay a:hover {
     color: white;
 }
+
+
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
@@ -394,4 +396,18 @@ fieldset ul {
 
 fieldset ul li {
     margin-top: 8px;
+}
+
+
+#logout-button {
+    background-color: #AEC87A;
+    border: 2px solid #1F497D;
+    height: 1.5em;
+    float: right;
+    border-radius: 8px;
+    color: #000000;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 8px;
 }

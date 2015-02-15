@@ -9,12 +9,17 @@
 
     function UsersService($http) {
         var service = {
-            getUser: getUser
+            getUser: getUser,
+            logout: logout
         };
         return service;
 
         function getUser() {
             return $http.get("/api/user");
+        }
+
+        function logout() {
+            return $http.get("/api/user/logout");
         }
 
 
