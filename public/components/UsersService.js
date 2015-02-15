@@ -21,7 +21,5 @@
         function logout() {
             return $http.get("/api/user/logout");
         }
-
-
     }
 })();

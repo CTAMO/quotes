@@ -21,10 +21,11 @@
     messageSchema.statics.add = add;
     messageSchema.statics.voteUp = voteUp;
 
-    function add(messageText) {
+    function add(messageText, authorUsername) {
         var newMessage = new this();
         newMessage._id = new mongoose.Types.ObjectId();
         newMessage.Text = messageText;
+        newMessage.AuthorUsername = authorUsername;
         newMessage.save(function(error) {
             if (error) {
                 console.log(error);

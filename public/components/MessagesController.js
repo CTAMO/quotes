@@ -27,6 +27,7 @@
             controller.getMessages();
             controller.getUser();
         }
+
         function getMessages() {
             MessagesService.getMessages()
                 .success(function(result) {

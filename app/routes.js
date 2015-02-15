@@ -69,7 +69,7 @@
             var messageText = request.body.messageText.trim();
 
             if (messageText) {
-                Message.add(messageText);
+                Message.add(messageText, request.user.Username);
             }
         });
 

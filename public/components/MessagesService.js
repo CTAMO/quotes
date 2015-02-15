@@ -31,8 +31,6 @@
         }
 
         function voteUpForMessage(messageId) {
-
-
             $http.post("/api/messages/voteup", {
                     messageId: messageId
                 })
