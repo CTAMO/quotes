@@ -5,7 +5,6 @@
     var mongoose = require("mongoose");
     var Schema = mongoose.Schema;
     var NOT_FOUND = -1;
-    var username = "gundars";
 
     var messageSchema = new Schema({
         _id: Schema.ObjectId,
@@ -37,10 +36,10 @@
         });
     }
 
-    function voteUp(messageId) {
+    function voteUp(messageId, voterUsername) {
         this.findById(messageId, function(error, message) {
-            if (message && message.Likes && message.Likes.indexOf(username) === NOT_FOUND) {
-                message.Likes.push(username);
+            if (message && message.Likes && message.Likes.indexOf(voterUsername) === NOT_FOUND) {
+                message.Likes.push(voterUsername);
                 message.save();
             }
         });

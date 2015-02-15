@@ -27,11 +27,11 @@
         //    });
         //});
 
-        app.get("/profile", isLoggedIn, function(request, response) {
-            response.render("profile.html", {
-                user : request.user // get the user out of session and pass to template
-            });
-        });
+        //app.get("/profile", isLoggedIn, function(request, response) {
+        //    response.render("profile.html", {
+        //        user : request.user // get the user out of session and pass to template
+        //    });
+        //});
 
         app.get("/auth/twitter", passport.authenticate("twitter"));
 
@@ -76,7 +76,7 @@
         app.post("/api/messages/voteup", isLoggedIn, function(request, response) {
             var messageId = request.body.messageId;
 
-            Message.voteUp(messageId);
+            Message.voteUp(messageId, request.user.Username);
             console.log("server message voted up " + messageId);
         });
 
