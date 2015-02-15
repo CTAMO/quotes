@@ -9,12 +9,13 @@
     "ejs": "^2.2.3",
     "express": "^5.0.0-alpha.1",
     "express-session": "~1.0.0",
+    "method-override": "~1.0.0",
     "mongoose": "^3.8.22",
     "multer": "^0.1.7",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
     "passport-twitter": "~1.0.2",
-    "method-override": "~1.0.0"
+    "twit": "^1.1.20"
   },
   "devDependencies": {
     "chai": "^1.10.0",

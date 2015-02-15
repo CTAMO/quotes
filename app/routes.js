@@ -3,6 +3,8 @@
 
     var User = require("./models/User");
     var Message = require("./models/Message");
+    var configAuth = require("./config/auth");
+    var Twit = require('twit');
 
     module.exports = function(app, passport) {
 
@@ -72,6 +74,20 @@
 
             if (messageText) {
                 Message.add(messageText, request.user.Username);
+
+                var newTweet = new Twit({
+                    consumer_key: configAuth.twitterAuth.consumerKey,
+                    consumer_secret: configAuth.twitterAuth.consumerSecret,
+                    access_token: configAuth.twitterAuth.accessToken,
+                    access_token_secret: configAuth.twitterAuth.accessTokenSecret
+                });
+
+                newTweet.post('statuses/update', { status: messageText }, function(error, data, response) {
+                    if (error) {
+                        console.log(error);
+                    }
+                });
+
             }
         });
 
