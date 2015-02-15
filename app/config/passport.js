@@ -28,11 +28,9 @@ module.exports = function(passport) {
     // TWITTER =================================================================
     // =========================================================================
     passport.use(new TwitterStrategy({
-
             consumerKey: configAuth.twitterAuth.consumerKey,
             consumerSecret: configAuth.twitterAuth.consumerSecret,
             callbackURL: configAuth.twitterAuth.callbackURL
-
         },
         function(token, tokenSecret, profile, done) {
 

@@ -22,7 +22,7 @@
         app.get('/signup', function(req, res) {
 
             // render the page and pass in any flash data if it exists
-            res.render('signup.ejs', {
+            res.render('signup.html', {
                 message: req.flash('signupMessage')
             });
         });
@@ -38,9 +38,9 @@
         // handle the callback after twitter has authenticated the user
         app.get('/auth/twitter/callback',
             passport.authenticate('twitter', {
-                successRedirect : '/profile',
-                //successRedirect : '/api/messages',
-                failureRedirect : '/'
+                //successRedirect : '/profile',
+                successRedirect : '/',
+                failureRedirect : '/login'
             })
         );
 
@@ -81,6 +81,17 @@
         });
 
 
+        app.get('/api/user', function(request, response){
+            if (request.isAuthenticated()) {
+                response.send({
+                    user: request.user
+                });
+            }
+            else {
+                var a = 10;
+            }
+        });
+
         app.post("/send", function(request, response) {
             var name = request.param("name");
 
@@ -118,33 +129,37 @@
 
         });
 
-        app.get("*", function(request, response) {
-            //User.find(function(error, data) {
-            //    if (error) {
-            //        console.log("an error has occurred");
-            //    }
-            //    else {
-            //        console.log("data is retrieved");
-            //         response.send({
-            //            users: data
-            //        });
-            //    }
-            //});
+        //app.get("*", function(request, response) {
+        //    //User.find(function(error, data) {
+        //    //    if (error) {
+        //    //        console.log("an error has occurred");
+        //    //    }
+        //    //    else {
+        //    //        console.log("data is retrieved");
+        //    //         response.send({
+        //    //            users: data
+        //    //        });
+        //    //    }
+        //    //});
+        //
+        //
+        //    //Message.find(function(error, data) {
+        //    //    if (error) {
+        //    //        console.log("an error has occurred");
+        //    //    }
+        //    //    else {
+        //    //        console.log("data is retrieved");
+        //    //        response.send({
+        //    //            data: data
+        //    //        });
+        //    //    }
+        //    //});
+        //
+        //    //response.sendFile("./public/index.html"); // load the single view file (angular will handle the page changes on the front-end)
+        //});
 
-
-            //Message.find(function(error, data) {
-            //    if (error) {
-            //        console.log("an error has occurred");
-            //    }
-            //    else {
-            //        console.log("data is retrieved");
-            //        response.send({
-            //            data: data
-            //        });
-            //    }
-            //});
-
-            //response.sendFile("./public/index.html"); // load the single view file (angular will handle the page changes on the front-end)
+        app.get('/', function(req, res) {
+            res.render('index.html');
         });
     };
 

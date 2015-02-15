@@ -252,17 +252,14 @@ div#title {
 
 #logindisplay a:link {
     color: white;
-    text-decoration: underline;
 }
 
 #logindisplay a:visited {
     color: white;
-    text-decoration: underline;
 }
 
 #logindisplay a:hover {
     color: white;
-    text-decoration: none;
 }
 
 /* Styles for validation helpers

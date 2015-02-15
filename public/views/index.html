@@ -1,23 +1,36 @@
 <!doctype html>
 <html lang="en">
-<!--<head>-->
+<head>
     <meta charset="UTF-8">
     <title>.:: Quotes ::.</title>
 
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/messages.css">
-    <link rel="stylesheet" href="css/bootstrap-mock.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/messages.css">
+    <link rel="stylesheet" href="../css/bootstrap-mock.css">
 </head>
 <body ng-app="quotesApp">
 
 
-    <div class="page">
+    <div class="page"  ng-controller="MessagesController">
         <div id="header">
             <div id="title">
                 <h1 class="logo">Quotes</h1>
             </div>
             <div id="logindisplay">
+                <ul>
+                    <li>
+                        Login or sign up with
+                        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span>Twitter</a>
+                    </li>
+                    <li>
+                        <strong>username</strong>: {{user.Username || "no name"}}<br>
+                    </li>
+                </ul>
+                <div id="loggedUser">
+
+                </div>
             </div>
+
 
             <div id="loginMenu">
             </div>
@@ -32,9 +45,9 @@
                 </ul>
             </div>
         </div>
-        <div id="main" ng-controller="MessagesController">
+        <div id="main">
 
-            <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span>Twitter</a>
+
             <div id="messages" ng-repeat="message in someMessages">
                 <article class="message">
                     <div class="message-info">
@@ -89,16 +102,17 @@
 
 
 
-    <script src="libs/jquery/dist/jquery.js"></script>
-    <script src="libs/angular/angular.js"></script>
-    <script src="libs/angular-route/angular-route.js"></script>
+    <script src="../libs/jquery/dist/jquery.js"></script>
+    <script src="../libs/angular/angular.js"></script>
+    <script src="../libs/angular-route/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
 
 
-    <script src="app.js"></script>
-    <script src="routes.js"></script>
-    <script src="components/MessagesService.js"></script>
-    <script src="components/MessagesController.js"></script>
+    <script src="../app.js"></script>
+    <script src="../routes.js"></script>
+    <script src="../components/UsersService.js"></script>
+    <script src="../components/MessagesService.js"></script>
+    <script src="../components/MessagesController.js"></script>
 
 </body>
 </html>
