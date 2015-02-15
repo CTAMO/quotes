@@ -9,7 +9,8 @@
             getMessages: getMessages,
             addMessage: addMessage,
             voteUpForMessage: voteUpForMessage,
-            voteDownForMessage: voteDownForMessage
+            voteDownForMessage: voteDownForMessage,
+            getBestMessages: getBestMessages
         };
         return service;
 
@@ -41,6 +42,10 @@
                     console.log("error when voting up for message: " + data);
                 });
             console.log("client message voted up " + messageId);
+        }
+
+        function getBestMessages() {
+            return $http.get("/api/bestmessages");
         }
 
         function voteDownForMessage(messageId) {

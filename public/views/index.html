@@ -40,7 +40,35 @@
             <!--</div>-->
         </div>
         <div id="main">
+            <div>Top rated quotes</div>
+            <div id="top-messages"  ng-repeat="message in bestMessages">
+
+                <article class="top-message">
+                    <div class="message-info">
+                        <div class="message-author">
+                            <strong>{{message.AuthorUsername}}:</strong>
+
+                            <a data-mutestatus="@message.IsAuthorMuted" class="mute-status muted"
+                               data-usernametobemuted="{{message.AuthorUsername}}"></a>
+                        </div>
+                        <div class="message-date-created">
+                            Date: <strong>{{message.DateCreated | date:'yyyy-MM-dd HH:mm:ss'}}</strong>
+                        </div>
+                        <div class="message-votes">
+                            <button ng-click="voteUpForMessage(message._id)" class="vote-up"></button>
+                            <span class="message-votes-count">
+                                {{message.Likes.length || 0}} votes
+                            </span>
+                            <button ng-click="voteDownForMessage(message._id)" class="vote-down"></button>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="message-text">"{{message.Text}}"</div>
+                </article>
+            </div>
+            <div>Quotes</div>
             <div id="messages"  ng-repeat="message in someMessages">
+
                 <article class="message">
                     <div class="message-info">
                         <div class="message-author">

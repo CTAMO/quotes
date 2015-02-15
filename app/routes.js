@@ -105,6 +105,30 @@
             console.log("server message voted up " + messageId);
         });
 
+        app.get("/api/bestmessages", function(request, response) {
+
+                Message
+                    .find()
+                    .sort({
+                        "LikesCount": -1
+                    })
+                    .limit(3)
+                    .exec(function(error, data) {
+                        if (error) {
+                            console.log(error);
+                        }
+                        else {
+                            response.send({
+                                bestMessages: data
+                            });
+                        }
+                    });
+
+        });
+
+
+
+
 
         app.get("/api/user", function(request, response){
             if (request.isAuthenticated()) {

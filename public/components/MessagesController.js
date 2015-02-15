@@ -55,6 +55,14 @@
                 .error(function(error) {
                     console.log('Error: ' + error);
                 });
+
+            MessagesService.getBestMessages()
+                .success(function(result) {
+                    $scope.bestMessages = result.bestMessages;
+                })
+                .error(function(error) {
+                    console.log('Error: ' + error);
+                });
         }
 
         function voteUpForMessage(messageId) {

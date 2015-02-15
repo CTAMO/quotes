@@ -14,7 +14,8 @@
             type: Date,
             default: Date.now
         },
-        Likes: Array
+        Likes: Array,
+        LikesCount: Number
     });
 
     messageSchema.statics.add = add;
@@ -41,6 +42,7 @@
         this.findById(messageId, function(error, message) {
             if (message && message.Likes && message.Likes.indexOf(voterUsername) === NOT_FOUND) {
                 message.Likes.push(voterUsername);
+                message.LikesCount = message.Likes.length;
                 message.save();
             }
         });
@@ -50,6 +52,7 @@
         this.findById(messageId, function(error, message) {
             if (message && message.Likes && message.Likes.indexOf(voterUsername) !== NOT_FOUND) {
                 message.Likes.splice(message.Likes.indexOf(voterUsername), 1);
+                message.LikesCount = message.Likes.length;
                 message.save();
             }
         });
