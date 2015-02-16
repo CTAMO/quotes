@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>.:: Quotes ::.</title>
-
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/messages.css">
     <link rel="stylesheet" href="../css/bootstrap-mock.css">
 </head>
 <body ng-app="quotesApp">
-
-
     <div class="page" ng-controller="MessagesController">
         <div id="header">
             <div id="title">
@@ -27,65 +24,61 @@
                     <button id="logout-button" ng-click="logout()">Logout</button>
                 </div>
             </div>
-
             <div class="clear"></div>
-
-
-            <!--<div id="menucontainer">-->
-                <!--<ul id="menu">-->
-                    <!--<li>-->
-                        <!--<a href="#">Item</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
         </div>
-        <div id="main">
-            <div>Top rated quotes</div>
-            <div id="top-messages"  ng-repeat="message in bestMessages">
 
+        <div id="main">
+            <div id="top-messages-title">Top rated quotes:</div>
+            <div id="top-messages"  ng-repeat="message in bestMessages">
                 <article class="top-message">
                     <div class="message-info">
                         <div class="message-author">
                             <strong>{{message.AuthorUsername}}:</strong>
 
-                            <a data-mutestatus="@message.IsAuthorMuted" class="mute-status muted"
-                               data-usernametobemuted="{{message.AuthorUsername}}"></a>
+                            <button ng-show="user && user.Username !== message.AuthorUsername"
+                                ng-click="muteUser(message.AuthorUsername)"
+                                ng-class="user && user.Username != message.AuthorUsername &&
+                                    user.MutedUsernames.indexOf(message.AuthorUsername) !== -1 ?
+                                    'muted' : 'unmuted'"></button>
                         </div>
                         <div class="message-date-created">
                             Date: <strong>{{message.DateCreated | date:'yyyy-MM-dd HH:mm:ss'}}</strong>
                         </div>
                         <div class="message-votes">
-                            <button ng-click="voteUpForMessage(message._id)" class="vote-up"></button>
+                            <button ng-show="user" ng-click="voteUpForMessage(message._id)" class="vote-up"></button>
                             <span class="message-votes-count">
                                 {{message.Likes.length || 0}} votes
                             </span>
-                            <button ng-click="voteDownForMessage(message._id)" class="vote-down"></button>
+                            <button ng-show="user" ng-click="voteDownForMessage(message._id)" class="vote-down"></button>
                         </div>
                     </div>
                     <div class="clear"></div>
                     <div class="message-text">"{{message.Text}}"</div>
                 </article>
             </div>
-            <div>Quotes</div>
-            <div id="messages"  ng-repeat="message in someMessages">
 
+            <div id="messages-title">Quotes:</div>
+            <div id="messages"  ng-repeat="message in someMessages">
                 <article class="message">
                     <div class="message-info">
                         <div class="message-author">
                             <strong>{{message.AuthorUsername}}:</strong>
 
-                            <a data-mutestatus="@message.IsAuthorMuted" class="mute-status muted"
-                               data-usernametobemuted="{{message.AuthorUsername}}"></a>
+                            <button ng-show="user && user.Username !== message.AuthorUsername"
+                                    ng-click="muteUser(message.AuthorUsername)"
+                                    ng-class="user && user.Username != message.AuthorUsername &&
+                                        user.MutedUsernames.indexOf(message.AuthorUsername) !== -1 ?
+                                        'muted' : 'unmuted'"></button>
                         </div>
                         <div class="message-date-created">
                             Date: <strong>{{message.DateCreated | date:'yyyy-MM-dd HH:mm:ss'}}</strong>
                         </div>
                         <div class="message-votes">
-                            <button ng-click="voteUpForMessage(message._id)" class="vote-up"></button>
+                            <button ng-show="user" ng-click="voteUpForMessage(message._id)" class="vote-up"></button>
                             <span class="message-votes-count">
                                 {{message.Likes.length || 0}} votes
                             </span>
-                            <button ng-click="voteDownForMessage(message._id)" class="vote-down"></button>
+                            <button ng-show="user" ng-click="voteDownForMessage(message._id)" class="vote-down"></button>
                         </div>
                     </div>
                     <div class="clear"></div>

@@ -15,7 +15,10 @@
             default: Date.now
         },
         Likes: Array,
-        LikesCount: Number
+        LikesCount: {
+            type: Number,
+            default: 0
+        }
     });
 
     messageSchema.statics.add = add;
@@ -54,6 +57,7 @@
                 message.Likes.splice(message.Likes.indexOf(voterUsername), 1);
                 message.LikesCount = message.Likes.length;
                 message.save();
+                console.log("voted down");
             }
         });
     }

@@ -9,17 +9,24 @@
 
     function UsersService($http) {
         var service = {
-            getUser: getUser,
-            logout: logout
+            getCurrentUser: getCurrentUser,
+            logout: logout,
+            mute: mute
         };
         return service;
 
-        function getUser() {
-            return $http.get("/api/user");
+        function getCurrentUser() {
+            return $http.get("/api/users");
         }
 
         function logout() {
-            return $http.get("/api/user/logout");
+            return $http.get("/api/users/logout");
+        }
+
+        function mute(username) {
+            $http.post("/api/users/mute", {
+                username: username
+            });
         }
     }
 })();

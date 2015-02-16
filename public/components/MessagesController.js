@@ -10,23 +10,25 @@
         var controller = this;
         controller.activate = activate;
         controller.getMessages = getMessages;
-        controller.getUser = getUser;
+        controller.getCurrentUser = getCurrentUser;
 
         controller.activate();
 
         $interval(function() {
-            //controller.getMessages();
-        }, 500);
+            //controller.activate();
+            //console.log("update");
+        }, 300);
 
         $scope.addMessage = addMessage;
         $scope.voteUpForMessage = voteUpForMessage;
         $scope.voteDownForMessage = voteDownForMessage;
         $scope.logout = logout;
+        $scope.muteUser = muteUser;
 
         function activate() {
             var controller = this;
             controller.getMessages();
-            controller.getUser();
+            controller.getCurrentUser();
         }
 
         function getMessages() {
@@ -80,8 +82,8 @@
             $scope.newMessagetext = "";
         }
 
-        function getUser() {
-            UsersService.getUser()
+        function getCurrentUser() {
+            UsersService.getCurrentUser()
                 .success(function(result) {
                     $scope.user = result.user;
                 })
@@ -94,6 +96,16 @@
             UsersService.logout()
                 .success(function(result) {
                     $scope.user = result.user;
+                })
+                .error(function(error) {
+                    console.log('Error : ' + error);
+                });
+        }
+
+        function muteUser(username) {
+            UsersService.mute(username)
+                .success(function(result) {
+                    console.log("muted");
                 })
                 .error(function(error) {
                     console.log('Error : ' + error);

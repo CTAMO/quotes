@@ -50,8 +50,8 @@
 
         function voteDownForMessage(messageId) {
             $http.post("/api/messages/votedown", {
-                messageId: messageId
-            })
+                    messageId: messageId
+                })
                 .success(function(data, status, headers, config) {
                     console.log(data);
                 })

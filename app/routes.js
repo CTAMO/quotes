@@ -87,7 +87,6 @@
                 //        console.log(error);
                 //    }
                 //});
-
             }
         });
 
@@ -102,78 +101,48 @@
             var messageId = request.body.messageId;
 
             Message.voteDown(messageId, request.user.Username);
-            console.log("server message voted up " + messageId);
+            //console.log("server message voted down " + messageId);
         });
 
         app.get("/api/bestmessages", function(request, response) {
-
-                Message
-                    .find()
-                    .sort({
-                        "LikesCount": -1
-                    })
-                    .limit(3)
-                    .exec(function(error, data) {
-                        if (error) {
-                            console.log(error);
-                        }
-                        else {
-                            response.send({
-                                bestMessages: data
-                            });
-                        }
-                    });
-
+            Message
+                .find()
+                .sort({
+                    "LikesCount": -1
+                })
+                .limit(3)
+                .exec(function(error, data) {
+                    if (error) {
+                        console.log(error);
+                    }
+                    else {
+                        response.send({
+                            bestMessages: data
+                        });
+                    }
+                });
         });
 
-
-
-
-
-        app.get("/api/user", function(request, response){
+        app.get("/api/users", function(request, response){
             if (request.isAuthenticated()) {
                 response.send({
                     user: request.user
                 });
             }
-            else {
-                var a = 10;
-            }
         });
 
-        app.get("/api/user/logout", isLoggedIn, function(request, response) {
+        app.get("/api/users/logout", isLoggedIn, function(request, response) {
             request.logout();
             response.redirect("/");
         });
 
-        //app.get("*", function(request, response) {
-        //    //User.find(function(error, data) {
-        //    //    if (error) {
-        //    //        console.log("an error has occurred");
-        //    //    }
-        //    //    else {
-        //    //        console.log("data is retrieved");
-        //    //         response.send({
-        //    //            users: data
-        //    //        });
-        //    //    }
-        //    //});
-        //
-        //
-        //    //Message.find(function(error, data) {
-        //    //    if (error) {
-        //    //        console.log("an error has occurred");
-        //    //    }
-        //    //    else {
-        //    //        console.log("data is retrieved");
-        //    //        response.send({
-        //    //            data: data
-        //    //        });
-        //    //    }
-        //    //});
-        //
-        //    //response.sendFile("./public/index.html"); // load the single view file (angular will handle the page changes on the front-end)
-        //});
+        app.post("/api/users/mute", isLoggedIn, function(request, response) {
+            var username = request.body.username;
+
+            if (username) {
+                User.mute(request.user._id, username);
+            }
+        });
 
         app.get("/", function(request, response) {
             response.render("index.html");
@@ -182,7 +151,6 @@
 
     // route middleware to make sure a user is logged in
     function isLoggedIn(request, response, next) {
-
         // if user is authenticated in the session, carry on
         if (request.isAuthenticated()) {
             return next();

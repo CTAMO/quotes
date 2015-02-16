@@ -10,6 +10,7 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var path = require("path");
+
 var app = express();
 
 app.use(cookieParser());
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-w
 
 //app.use(morgan('dev'));
 //app.use(express.static(path.resolve('./public')));
+
 
 app.use(express.static(__dirname + "/public"));
 

@@ -157,11 +157,12 @@
 
 .muted {
     display: inline-block;
-    width: 30px;
+    width: 24px;
     height: 24px;
     background-image: url('../images/unmute.png');
     background-repeat: no-repeat;
     background-size: 24px 24px;
+    border: none;
 }
 
 .unmuted {
@@ -171,6 +172,7 @@
     background-image: url('../images/mute.png');
     background-repeat: no-repeat;
     background-size: 24px 24px;
+    border: none;
 }
 
 #postMessage {
@@ -188,4 +190,9 @@
     border-radius: 4px;
     border: 2px solid #1F497D;
     margin-top: 16px
+}
+
+
+#messages-title {
+    margin-top: 16px;
 }
