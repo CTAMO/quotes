@@ -24,6 +24,7 @@
         $scope.voteDownForMessage = voteDownForMessage;
         $scope.logout = logout;
         $scope.muteUser = muteUser;
+        $scope.unmuteUser = unmuteUser;
 
         function activate() {
             var controller = this;
@@ -106,6 +107,16 @@
             UsersService.mute(username)
                 .success(function(result) {
                     console.log("muted");
+                })
+                .error(function(error) {
+                    console.log('Error : ' + error);
+                });
+        }
+
+        function unmuteUser(username) {
+            UsersService.unmute(username)
+                .success(function(result) {
+                    console.log("unmuted");
                 })
                 .error(function(error) {
                     console.log('Error : ' + error);

@@ -11,7 +11,8 @@
         var service = {
             getCurrentUser: getCurrentUser,
             logout: logout,
-            mute: mute
+            mute: mute,
+            unmute: unmute
         };
         return service;
 
@@ -25,6 +26,12 @@
 
         function mute(username) {
             $http.post("/api/users/mute", {
+                username: username
+            });
+        }
+
+        function unmute(username) {
+            $http.post("/api/users/unmute", {
                 username: username
             });
         }

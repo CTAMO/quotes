@@ -144,6 +144,14 @@
             }
         });
 
+        app.post("/api/users/unmute", isLoggedIn, function(request, response) {
+            var username = request.body.username;
+
+            if (username) {
+                User.unmute(request.user._id, username);
+            }
+        });
+
         app.get("/", function(request, response) {
             response.render("index.html");
         });

@@ -36,7 +36,9 @@
                             <strong>{{message.AuthorUsername}}:</strong>
 
                             <button ng-show="user && user.Username !== message.AuthorUsername"
-                                ng-click="muteUser(message.AuthorUsername)"
+                                ng-click="user && user.Username != message.AuthorUsername &&
+                                    user.MutedUsernames.indexOf(message.AuthorUsername) !== -1 ?
+                                    unmuteUser(message.AuthorUsername) : muteUser(message.AuthorUsername)"
                                 ng-class="user && user.Username != message.AuthorUsername &&
                                     user.MutedUsernames.indexOf(message.AuthorUsername) !== -1 ?
                                     'muted' : 'unmuted'"></button>
