@@ -5,6 +5,7 @@
     var Message = require("./models/Message");
     var configAuth = require("./config/auth");
     var Twit = require('twit');
+    var NOT_FOUND = -1;
 
     module.exports = function(app, passport) {
 
@@ -46,27 +47,73 @@
         );
 
         app.get("/api/messages", function(request, response) {
+            var currentUser = request.user;
+            var messages = [];
+            var messagesSortedByDate = [];
+            var mutedUsernames = [];
 
-            Message.find(function(error, data) {
-                if (error) {
-                    console.log("an error has occurred");
-                }
-                else {
-                    var messagesSortedByDate = data.sort(function(message1, message2) {
-                        return ((-1) * (message1.DateCreated - message2.DateCreated));
-                    });
-                    //console.log("data is retrieved");
-                    response.send({
-                        messages: messagesSortedByDate
-                    });
-                }
-            });
+            if (!currentUser) {
+                Message.find(function(error, data) {
+                    if (error) {
+                        console.log("an error has occurred");
+                    }
+                    else {
+                        var messagesSortedByDate = data.sort(function(message1, message2) {
+                            return ((-1) * (message1.DateCreated - message2.DateCreated));
+                        });
 
-            //response.send({
-            //    data: [{
-            //        text: "stamo message"
-            //    }]
-            //});
+                        response.send({
+                            messages: messagesSortedByDate
+                        });
+                    }
+                });
+            }
+            else {
+                mutedUsernames = currentUser.MutedUsernames;
+                Message
+                    .find(function(error, allMessages) {
+                        if (!error && allMessages && allMessages.length > 0) {
+                            messages = allMessages.filter(function (message) {
+                                    var test =
+                                        (mutedUsernames.indexOf(message.AuthorUsername) === NOT_FOUND ||
+                                        (mutedUsernames.indexOf(message.AuthorUsername) >= 0 &&
+                                        message.DateCreated < currentUser.MutedDates[mutedUsernames.indexOf(message.AuthorUsername)]));
+                                    return test;
+                                });
+
+                            messagesSortedByDate = messages.sort(function(message1, message2) {
+                                return ((-1) * (message1.DateCreated - message2.DateCreated));
+                            });
+
+                            response.send({
+                                messages: messagesSortedByDate
+                            });
+                        }
+                    });
+
+                //Message
+                //    .find()
+                //    .$where(function() {
+                //            return mutedUsernames.indexOf(this.AuthorUsername) === NOT_FOUND;
+                //        }
+                //    )
+                //    .exec(function(error, data) {
+                //        if (error) {
+                //            console.log("an error has occurred");
+                //        }
+                //        else {
+                //            var messagesSortedByDate = data.sort(function(message1, message2) {
+                //                return ((-1) * (message1.DateCreated - message2.DateCreated));
+                //            });
+                //
+                //            response.send({
+                //                messages: messagesSortedByDate
+                //            });
+                //        }
+                //    });
+
+            }
+
         });
 
         app.post("/api/messages/add", isLoggedIn, function(request, response) {
