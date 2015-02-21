@@ -15,7 +15,7 @@
         controller.activate();
 
         $interval(function() {
-            //controller.activate();
+            controller.activate();
             //console.log("update");
         }, 300);
 
@@ -25,6 +25,10 @@
         $scope.logout = logout;
         $scope.muteUser = muteUser;
         $scope.unmuteUser = unmuteUser;
+
+
+        $scope.itemsPerPage = 2;
+        $scope.currentPage = 1;
 
         function activate() {
             var controller = this;
@@ -39,8 +43,6 @@
                     $scope.messages = result.messages;
 
                     $scope.someMessages = [];
-                    $scope.itemsPerPage = 2;
-                    $scope.currentPage = 1;
 
                     $scope.getMessagesToDisplay = function() {
                         var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);

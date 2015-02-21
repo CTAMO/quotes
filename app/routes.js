@@ -6,35 +6,11 @@
     var configAuth = require("./config/auth");
     var Twit = require('twit');
     var NOT_FOUND = -1;
+    var http = require("http");
+
+    http.globalAgent.maxSockets = 50;
 
     module.exports = function(app, passport) {
-
-        app.get("/login", function(request, response) {
-
-            // render the page and pass in any flash data if it exists
-            response.render("login.html", {
-                message: request.flash("loginMessage")
-            });
-        });
-
-        //app.get("/logout", function(request, response) {
-        //    request.logout();
-        //    response.redirect("/");
-        //});
-
-        //app.get("/signup", function(request, response) {
-        //
-        //    // render the page and pass in any flash data if it exists
-        //    response.render("signup.html", {
-        //        message: request.flash("signupMessage")
-        //    });
-        //});
-
-        //app.get("/profile", isLoggedIn, function(request, response) {
-        //    response.render("profile.html", {
-        //        user : request.user // get the user out of session and pass to template
-        //    });
-        //});
 
         app.get("/auth/twitter", passport.authenticate("twitter"));
 
@@ -90,28 +66,6 @@
                             });
                         }
                     });
-
-                //Message
-                //    .find()
-                //    .$where(function() {
-                //            return mutedUsernames.indexOf(this.AuthorUsername) === NOT_FOUND;
-                //        }
-                //    )
-                //    .exec(function(error, data) {
-                //        if (error) {
-                //            console.log("an error has occurred");
-                //        }
-                //        else {
-                //            var messagesSortedByDate = data.sort(function(message1, message2) {
-                //                return ((-1) * (message1.DateCreated - message2.DateCreated));
-                //            });
-                //
-                //            response.send({
-                //                messages: messagesSortedByDate
-                //            });
-                //        }
-                //    });
-
             }
 
         });

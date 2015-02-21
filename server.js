@@ -8,7 +8,13 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var path = require("path");
+var http = require("http");
+var https = require("https");
 var app = express();
+
+
+http.globalAgent.maxSockets = 50;
+https.globalAgent.maxSockets = 100;
 
 app.use(cookieParser());
 app.use(bodyParser.json()); // for parsing application/json
@@ -27,5 +33,9 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
 require("./app/routes")(app, passport);
+
+http.globalAgent.maxSockets = 50;
+https.globalAgent.maxSockets = 100;
+
 
 app.listen(app.get("port"));
