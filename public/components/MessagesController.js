@@ -16,7 +16,6 @@
 
         $interval(function() {
             controller.activate();
-            //console.log("update");
         }, 300);
 
         $scope.addMessage = addMessage;
@@ -58,7 +57,7 @@
 
                 })
                 .error(function(error) {
-                    console.log('Error: ' + error);
+                    //console.log('Error: ' + error);
                 });
 
             MessagesService.getBestMessages()
@@ -66,17 +65,15 @@
                     $scope.bestMessages = result.bestMessages;
                 })
                 .error(function(error) {
-                    console.log('Error: ' + error);
+                    //console.log('Error: ' + error);
                 });
         }
 
         function voteUpForMessage(messageId) {
-            console.log("controller vote up");
             MessagesService.voteUpForMessage(messageId);
         }
 
         function voteDownForMessage(messageId) {
-            console.log("controller vote up");
             MessagesService.voteDownForMessage(messageId);
         }
 
@@ -91,7 +88,7 @@
                     $scope.user = result.user;
                 })
                 .error(function(error) {
-                    console.log('Error getting user: ' + error);
+                    //console.log('Error getting user: ' + error);
                 });
         }
 
@@ -101,27 +98,27 @@
                     $scope.user = result.user;
                 })
                 .error(function(error) {
-                    console.log('Error : ' + error);
+                    //console.log('Error : ' + error);
                 });
         }
 
         function muteUser(username) {
             UsersService.mute(username)
                 .success(function(result) {
-                    console.log("muted");
+                    //console.log("muted");
                 })
                 .error(function(error) {
-                    console.log('Error : ' + error);
+                    //console.log('Error : ' + error);
                 });
         }
 
         function unmuteUser(username) {
             UsersService.unmute(username)
                 .success(function(result) {
-                    console.log("unmuted");
+                    //console.log("unmuted");
                 })
                 .error(function(error) {
-                    console.log('Error : ' + error);
+                    //console.log('Error : ' + error);
                 });
         }
     }
